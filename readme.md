@@ -323,4 +323,6 @@ Contributing to this project and developing new features involves a series of st
 This library is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the library or the use or other dealings in the library.
 
 ## License
-TBD
+This software library is licensed under the Apache License 2.0. You are free to use, modify, and distribute this library in your products under the terms of the Apache License. It is required that any use of this library is accompanied by proper attribution to the original author.
+
+For more details on the license terms and conditions, please refer to the full Apache License 2.0 documentation available at [LICENSE](LICENSE).
