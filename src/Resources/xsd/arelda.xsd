@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="http://bar.admin.ch/arelda/v4" xmlns:arelda="http://bar.admin.ch/arelda/v4" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://bar.admin.ch/arelda/v4" version="5.0">
+	<xs:include schemaLocation="ablieferung.xsd"/>
+	<xs:include schemaLocation="paket.xsd"/>
+	<xs:include schemaLocation="provenienz.xsd"/>
+	<xs:include schemaLocation="ordnungssystem.xsd"/>
+	<xs:include schemaLocation="ordnungssystemposition.xsd"/>
+	<xs:include schemaLocation="dossier.xsd"/>
+	<xs:include schemaLocation="dokument.xsd"/>
+	<xs:include schemaLocation="ordner.xsd"/>
+	<xs:include schemaLocation="datei.xsd"/>
+	<xs:include schemaLocation="archivischerVorgang.xsd"/>
+	<xs:include schemaLocation="archivischeNotiz.xsd"/>
+	<xs:include schemaLocation="zusatzDaten.xsd"/>
+	<xs:element name="paket" type="paket"/>
+	<xs:complexType abstract="true" name="paket">
+		<xs:sequence>
+			<xs:element name="paketTyp" type="paketTyp"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+		</xs:sequence>
+		<xs:attribute name="schemaVersion" type="schemaVersion" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="paketSIP">
+		<xs:complexContent>
+			<xs:extension base="paket">
+				<xs:sequence>
+					<xs:element name="inhaltsverzeichnis" type="inhaltsverzeichnis"/>
+					<xs:element name="ablieferung" type="ablieferungSIP"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischerVorgang" type="archivischerVorgang"/>
+					<xs:element minOccurs="0" name="referenzUebernahmedossier" type="referenzUebernahmedossier"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="ablieferung">
+		<xs:sequence>
+			<xs:element name="ablieferungstyp" type="ablieferungstyp"/>
+			<xs:element name="ablieferndeStelle" type="ablieferndeStelle"/>
+			<xs:element minOccurs="0" name="entstehungszeitraum" type="historischerZeitraum"/>
+			<xs:element minOccurs="0" name="ablieferungsteile" type="ablieferungsteile"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungAblieferung"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="unstrukturierterAnhang" type="unstrukturierterAnhang">
+				<xs:annotation>
+					<xs:documentation>DEPRECATED!</xs:documentation>
+				</xs:annotation>
+				<xs:unique name="uniqueDateiRefUnstrukturierterAnhang">
+					<xs:selector xpath="./arelda:dateiRef"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="ablieferungSIP">
+		<xs:complexContent>
+			<xs:extension base="ablieferung">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ablieferungsnummer" type="ablieferungsnummer"/>
+					<xs:element minOccurs="0" name="angebotsnummer" type="angebotsnummer"/>
+					<xs:element minOccurs="0" name="referenzBewertungsentscheid" type="referenzBewertungsentscheid"/>
+					<xs:element minOccurs="0" name="referenzSchutzfristenFormular" type="referenzSchutzfristenFormular"/>
+					<xs:element minOccurs="0" name="schutzfristenkategorie" type="schutzfristenkategorieAblieferung"/>
+					<xs:element minOccurs="0" name="schutzfrist" type="schutzfristAblieferung"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ablieferungGeverSIP">
+		<xs:complexContent>
+			<xs:extension base="ablieferungSIP">
+				<xs:sequence>
+					<xs:element name="provenienz" type="provenienzGever"/>
+					<xs:element name="ordnungssystem" type="ordnungssystemGever"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ablieferungFilesSIP">
+		<xs:complexContent>
+			<xs:extension base="ablieferungSIP">
+				<xs:sequence>
+					<xs:element name="provenienz" type="provenienzFiles"/>
+					<xs:element minOccurs="0" name="ordnungssystem" type="ordnungssystemFiles"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDokumentDateiFilesAblieferung">
+						<xs:unique name="uniqueDateiRefAblieferungMappeFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="provenienz">
+		<xs:sequence>
+			<xs:element name="aktenbildnerName" type="aktenbildnerName"/>
+			<xs:element minOccurs="0" name="systemName" type="systemName"/>
+			<xs:element minOccurs="0" name="systemBeschreibung" type="systemBeschreibung"/>
+			<xs:element minOccurs="0" name="existenzzeitraum" type="historischerZeitraum"/>
+			<xs:element minOccurs="0" name="geschichteAktenbildner" type="geschichteAktenbildner"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungProvenienz"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="provenienzGever">
+		<xs:complexContent>
+			<xs:extension base="provenienz">
+				<xs:sequence>
+					<xs:element name="registratur" type="registratur"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="provenienzFiles">
+		<xs:complexContent>
+			<xs:extension base="provenienz">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="registratur" type="registratur"/>
+					<xs:element minOccurs="0" name="verwandteSysteme" type="verwandteSysteme"/>
+					<xs:element minOccurs="0" name="archivierungsmodusLoeschvorschriften" type="archivierungsmodusLoeschvorschriften"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="ordnungssystem">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="generation" type="generation"/>
+			<xs:element minOccurs="0" name="anwendungszeitraum" type="historischerZeitraum"/>
+			<xs:element minOccurs="0" name="mitbenutzung" type="mitbenutzung"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungOrdnungssysstem"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ordnungssystemGever">
+		<xs:complexContent>
+			<xs:extension base="ordnungssystem">
+				<xs:sequence>
+					<xs:element name="name" type="nameOrdnungssystem"/>
+					<xs:element maxOccurs="unbounded" name="ordnungssystemposition" type="ordnungssystempositionGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ordnungssystemFiles">
+		<xs:complexContent>
+			<xs:extension base="ordnungssystem">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="name" type="nameOrdnungssystem"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ordnungssystemposition" type="ordnungssystempositionFiles"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeOrdnungssystempositionFiles"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="ordnungssystemposition">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="federfuehrendeOrganisationseinheit" type="federfuehrendeOrganisationseinheitOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="klassifizierungskategorie" type="klassifizierungskategorieOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="datenschutz" type="datenschutzOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatus" type="oeffentlichkeitsstatusOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatusBegruendung" type="oeffentlichkeitsstatusBegruendungOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="sonstigeBestimmungen" type="sonstigeBestimmungenOrdnungssystemposition"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+		</xs:sequence>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="ordnungssystempositionGever">
+		<xs:complexContent>
+			<xs:extension base="ordnungssystemposition">
+				<xs:sequence>
+					<xs:element name="nummer" type="nummer"/>
+					<xs:element name="titel" type="titelOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfristenkategorie" type="schutzfristenkategorieOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfrist" type="schutzfristOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfristenBegruendung" type="schutzfristenBegruendungOrdnungssystemposition"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ordnungssystemposition" type="ordnungssystempositionGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDossierGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+				<xs:attribute name="id" type="idOrdnungssystemposition" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ordnungssystempositionFiles">
+		<xs:complexContent>
+			<xs:extension base="ordnungssystemposition">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="nummer" type="nummer"/>
+					<xs:element minOccurs="0" name="titel" type="titelOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfristenkategorie" type="schutzfristenkategorieOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfrist" type="schutzfristOrdnungssystemposition"/>
+					<xs:element minOccurs="0" name="schutzfristenBegruendung" type="schutzfristenBegruendungOrdnungssystemposition"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ordnungssystemposition" type="ordnungssystempositionFiles"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierFiles">
+						<xs:unique name="uniqueDateiRefOspDossierFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDossierFiles">
+						<xs:unique name="uniqueDateiRefOspMappeFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+				<xs:attribute name="id" type="idOrdnungssystemposition" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="dossier">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="zusatzmerkmal" type="zusatzmerkmal"/>
+			<xs:element name="titel" type="titelDossier"/>
+			<xs:element minOccurs="0" name="inhalt" type="inhalt"/>
+			<xs:element minOccurs="0" name="formInhalt" type="formInhalt"/>
+			<xs:element minOccurs="0" name="erscheinungsform" type="erscheinungsformDossier"/>
+			<xs:element minOccurs="0" name="federfuehrendeOrganisationseinheit" type="federfuehrendeOrganisationseinheitDossier"/>
+			<xs:element name="entstehungszeitraum" type="historischerZeitraum"/>
+			<xs:element minOccurs="0" name="entstehungszeitraumAnmerkung" type="entstehungszeitraumAnmerkung"/>
+			<xs:element minOccurs="0" name="klassifizierungskategorie" type="klassifizierungskategorieDossier"/>
+			<xs:element minOccurs="0" name="datenschutz" type="datenschutzDossier"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatus" type="oeffentlichkeitsstatusDossier"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatusBegruendung" type="oeffentlichkeitsstatusBegruendungDossier"/>
+			<xs:element minOccurs="0" name="sonstigeBestimmungen" type="sonstigeBestimmungenDossier"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungDossier"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="idDossier" use="required"/>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="dossierGever">
+		<xs:complexContent>
+			<xs:extension base="dossier">
+				<xs:sequence>
+					<xs:element name="aktenzeichen" type="aktenzeichen"/>
+					<xs:element minOccurs="0" name="eroeffnungsdatum" type="historischerZeitpunkt"/>
+					<xs:element minOccurs="0" name="abschlussdatum" type="historischerZeitpunkt"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="vorgang" type="vorgangAktivitaet"/>
+					<xs:element minOccurs="0" name="schutzfristenkategorie" type="schutzfristenkategorieDossier"/>
+					<xs:element minOccurs="0" name="schutzfrist" type="schutzfristDossier"/>
+					<xs:element minOccurs="0" name="schutzfristenBegruendung" type="schutzfristenBegruendungDossier"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDokumentGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dokument" type="dokumentGever"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="dossierFiles">
+		<xs:complexContent>
+			<xs:extension base="dossier">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="aktenzeichen" type="aktenzeichen"/>
+					<xs:element minOccurs="0" name="schutzfristenkategorie" type="schutzfristenkategorieDossier"/>
+					<xs:element minOccurs="0" name="schutzfrist" type="schutzfristDossier"/>
+					<xs:element minOccurs="0" name="schutzfristenBegruendung" type="schutzfristenBegruendungDossier"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierFiles">
+						<xs:unique name="uniqueDateiRefSubdossierFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDokumentDateiFilesDossier">
+						<xs:unique name="uniqueDateiRefDossierMappeFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dokument" type="dokumentFiles">
+						<xs:unique name="uniqueDateiRefDossierDokumentFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dateiRef" type="dateiRef"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+					<xs:element minOccurs="0" name="umfang" type="umfang"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType mixed="true" name="vorgangAktivitaet">
+		<xs:sequence minOccurs="0">
+			<xs:element name="titel" type="titelVorgang"/>
+			<xs:element minOccurs="0" name="arbeitsanweisung" type="arbeitsanweisungVorgang"/>
+			<xs:element minOccurs="0" name="federfuehrung" type="federfuehrungVorgang"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="verweis" type="verweisVorgang"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungVorgang"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="aktivitaet" type="aktivitaet"/>
+		</xs:sequence>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+		<xs:attribute name="order" type="orderVorgang" use="optional">
+			<xs:annotation>
+				<xs:documentation>DEPRECATED!</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="aktivitaet">
+		<xs:sequence>
+			<xs:sequence>
+				<xs:element name="vorschreibung" type="vorschreibungAktivitaet"/>
+				<xs:element minOccurs="0" name="anweisung" type="anweisungAktivitaet"/>
+				<xs:element minOccurs="0" name="bearbeiter" type="bearbeiterAktivitaet"/>
+				<xs:element minOccurs="0" name="abschlussdatum" type="abschlussdatumAktivitaet"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="verweis" type="verweisAktivitaet"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="bemerkung" type="bemerkungAktivitaet"/>
+				<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+		<xs:attribute name="order" type="orderAktivitaet" use="optional">
+			<xs:annotation>
+				<xs:documentation>DEPRECATED!</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="mappe">
+		<xs:sequence>
+			<xs:element name="titel" type="titelMappe"/>
+			<xs:element minOccurs="0" name="inhalt" type="inhalt"/>
+			<xs:element minOccurs="0" name="eroeffnungsdatum" type="historischerZeitpunkt"/>
+			<xs:element minOccurs="0" name="erscheinungsform" type="erscheinungsformDossier"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungMappe"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="idMappe" use="required"/>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="mappeDossierGever">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierGever"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mappeDokumentGever">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dokument" type="dokumentGever"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mappeOrdnungssystempositionFiles">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="ordnungssystemposition" type="ordnungssystempositionFiles"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mappeDossierFiles">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dossier" type="dossierFiles">
+						<xs:unique name="uniqueDateiRefMappeDossierFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mappeDokumentDateiFilesDossier">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dokument" type="dokumentFiles">
+						<xs:unique name="uniqueDateiRefMappeDokumentFilesDossier">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dateiRef" type="dateiRef"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="mappeDokumentDateiFilesAblieferung">
+		<xs:complexContent>
+			<xs:extension base="mappe">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dokument" type="dokumentFiles">
+						<xs:unique name="uniqueDateiRefMappeDokumentFilesAblieferung">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="dateiRef" type="dateiRef"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="mappe" type="mappeDokumentDateiFilesAblieferung">
+						<xs:unique name="uniqueDateiRefAblieferungMappeSubmappeFiles">
+							<xs:selector xpath="./arelda:dateiRef"/>
+							<xs:field xpath="."/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="dokument">
+		<xs:sequence>
+			<xs:element name="titel" type="titelDokument"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="autor" type="autor"/>
+			<xs:element name="erscheinungsform" type="erscheinungsformDokument"/>
+			<xs:element minOccurs="0" name="dokumenttyp" type="dokumenttyp"/>
+			<xs:element minOccurs="0" name="registrierdatum" type="historischerZeitpunkt"/>
+			<xs:element minOccurs="0" name="entstehungszeitraum" type="historischerZeitraum"/>
+			<xs:element minOccurs="0" name="klassifizierungskategorie" type="klassifizierungskategorieDokument"/>
+			<xs:element minOccurs="0" name="datenschutz" type="datenschutzDokument"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatus" type="oeffentlichkeitsstatusDokument"/>
+			<xs:element minOccurs="0" name="oeffentlichkeitsstatusBegruendung" type="oeffentlichkeitsstatusBegruendungDokument"/>
+			<xs:element minOccurs="0" name="sonstigeBestimmungen" type="sonstigeBestimmungenDokument"/>
+			<xs:element minOccurs="0" name="bemerkung" type="bemerkungDokument"/>
+			<xs:element minOccurs="0" name="zusatzDaten" type="zusatzDaten"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="dateiRef" type="dateiRef"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="idDokument" use="required"/>
+		<xs:attribute name="reihung" type="reihungElemente" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="dokumentGever">
+		<xs:complexContent>
+			<xs:extension base="dokument">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="anwendung" type="anwendung"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="dokumentFiles">
+		<xs:complexContent>
+			<xs:extension base="dokument">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="inhaltsverzeichnis">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="ordner" type="ordner"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="datei" type="datei"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ordner">
+		<xs:sequence>
+			<xs:element name="name" type="nameOrdner"/>
+			<xs:element minOccurs="0" name="originalName" type="originalName"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="ordner" type="ordner"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="datei" type="datei"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="dateiRefs">
+		<xs:restriction base="xs:IDREFS">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="dateiRef">
+		<xs:simpleContent>
+			<xs:extension base="xs:IDREFS">
+				<xs:attribute name="version" type="dateiVersion" use="optional"/>
+				<xs:attribute name="repraesentation" type="dateiRepraesentation" use="optional"/>
+				<xs:attribute name="information" type="dateiInformation" use="optional"/>
+				<xs:attribute name="reihung" type="dateiReihung" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="reihungElemente">
+		<xs:union memberTypes="xs:integer xs:string xs:date"/>
+	</xs:simpleType>
+	<xs:complexType name="datei">
+		<xs:sequence>
+			<xs:element name="name" type="nameDatei"/>
+			<xs:element minOccurs="0" name="originalName" type="originalName"/>
+			<xs:element name="pruefalgorithmus" type="pruefalgorithmus"/>
+			<xs:element name="pruefsumme" type="pruefsumme"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="eigenschaft" type="eigenschaftDatei"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="archivischeNotiz" type="archivischeNotiz"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="idDatei" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="eigenschaftDatei">
+		<xs:simpleContent>
+			<xs:extension base="eigenschaft">
+				<xs:attribute name="name" type="text4" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="archivischerVorgang">
+		<xs:sequence>
+			<xs:element name="vorgangstyp" type="vorgangstyp"/>
+			<xs:element name="beschreibung" type="beschreibung"/>
+			<xs:element name="datum" type="zeitraum"/>
+			<xs:element name="bearbeiter" type="bearbeiter"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="archivischeNotiz">
+		<xs:sequence>
+			<xs:element name="notizDatum" type="notizDatum"/>
+			<xs:element minOccurs="0" name="notizErfasser" type="notizErfasser"/>
+			<xs:element name="notizBeschreibung" type="notizBeschreibung"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="idArchivischeNotiz" use="required"/>
+	</xs:complexType>
+	<!-- DEPRECATED! Sollte nicht mehr verwendet werden und wurde auch nicht weitergepflegt und kontrolliert. -->
+	<!-- DEPRECATED! Should no longer be used and has not been maintained or checked.  -->
+	<!-- DEPRECATED! Ne doit plus être utilisé et n'a pas été entretenu ou inspecté.  -->
+	<xs:complexType name="unstrukturierterAnhang">
+		<xs:annotation>
+			<xs:documentation>DEPRECATED! Should not be used anymore.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="dateiRef" type="dateiRefs"/>
+			<xs:element name="dateiBeschreibung" type="text4">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,620 @@
+# NOTE: Requires **VS2019 16.3** or later
+
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+# Csproj files
+[*.csproj]
+
+# Indentation and spacing
+indent_size = 4
+indent_style = space
+charset = utf-8
+
+# New line preferences
+end_of_line = crlf
+insert_final_newline = false
+
+# Code files
+[*.cs]
+
+#### Core EditorConfig Options ####
+
+# Indentation and spacing
+indent_size = 4
+indent_style = space
+tab_width = 4
+charset = utf-8
+
+# New line preferences
+end_of_line = crlf
+insert_final_newline = false
+
+#### .NET Coding Conventions ####
+
+# Organize usings
+dotnet_separate_import_directive_groups = false
+dotnet_sort_system_directives_first = true
+file_header_template = unset
+
+# this. and Me. preferences
+dotnet_style_qualification_for_event = false
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_method = false
+dotnet_style_qualification_for_property = false
+
+# Language keywords vs BCL types preferences
+dotnet_style_predefined_type_for_locals_parameters_members = true
+dotnet_style_predefined_type_for_member_access = true
+
+# Parentheses preferences
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity
+
+# Modifier preferences
+dotnet_style_require_accessibility_modifiers = for_non_interface_members
+
+# Expression-level preferences
+csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_inlined_variable_declaration = true:suggestion
+csharp_style_throw_expression = true:suggestion
+dotnet_style_coalesce_expression = true
+dotnet_style_collection_initializer = true
+dotnet_style_explicit_tuple_names = true
+dotnet_style_namespace_match_folder = true
+dotnet_style_null_propagation = true
+dotnet_style_object_initializer = true
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+dotnet_style_prefer_auto_properties = true:suggestion
+dotnet_style_prefer_compound_assignment = true
+dotnet_style_prefer_conditional_expression_over_assignment = false:suggestion
+dotnet_style_prefer_conditional_expression_over_return = false:suggestion
+dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed
+dotnet_style_prefer_inferred_anonymous_type_member_names = false
+dotnet_style_prefer_inferred_tuple_names = true
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true
+dotnet_style_prefer_simplified_boolean_expressions = true
+dotnet_style_prefer_simplified_interpolation = true
+
+# Field preferences
+dotnet_style_readonly_field = false:suggestion
+
+# Parameter preferences
+dotnet_code_quality_unused_parameters = all:suggestion
+
+# Suppression preferences
+dotnet_remove_unnecessary_suppression_exclusions = 0
+
+# New line preferences
+dotnet_style_allow_multiple_blank_lines_experimental = false:error
+dotnet_style_allow_statement_immediately_after_block_experimental = false:error
+
+#### C# Coding Conventions ####
+
+# var preferences
+csharp_style_var_elsewhere = false
+csharp_style_var_for_built_in_types = false
+csharp_style_var_when_type_is_apparent = false
+
+# Expression-bodied members
+csharp_style_expression_bodied_accessors = false
+csharp_style_expression_bodied_constructors = false
+csharp_style_expression_bodied_indexers = false
+csharp_style_expression_bodied_lambdas = when_on_single_line
+csharp_style_expression_bodied_local_functions = false
+csharp_style_expression_bodied_methods = false
+csharp_style_expression_bodied_operators = false
+csharp_style_expression_bodied_properties = false
+
+# Pattern matching preferences
+csharp_style_pattern_matching_over_as_with_null_check = true
+csharp_style_pattern_matching_over_is_with_cast_check = true
+csharp_style_prefer_extended_property_pattern = true
+csharp_style_prefer_not_pattern = true
+csharp_style_prefer_pattern_matching = true
+csharp_style_prefer_switch_expression = false:warning
+
+# Null-checking preferences
+csharp_style_conditional_delegate_call = true
+
+# Modifier preferences
+csharp_prefer_static_local_function = false
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
+csharp_style_prefer_readonly_struct = true
+
+# Code-block preferences
+csharp_prefer_braces = true
+csharp_prefer_simple_using_statement = false
+csharp_style_namespace_declarations = block_scoped:warning
+csharp_style_prefer_method_group_conversion = true
+csharp_style_prefer_top_level_statements = true
+
+# Expression-level preferences
+csharp_prefer_simple_default_expression = true
+csharp_style_deconstructed_variable_declaration = true
+csharp_style_implicit_object_creation_when_type_is_apparent = true
+csharp_style_inlined_variable_declaration = true
+csharp_style_prefer_index_operator = false
+csharp_style_prefer_local_over_anonymous_function = true
+csharp_style_prefer_null_check_over_type_check = true
+csharp_style_prefer_range_operator = false
+csharp_style_prefer_tuple_swap = true
+csharp_style_prefer_utf8_string_literals = true
+csharp_style_throw_expression = true
+csharp_style_unused_value_assignment_preference = discard_variable
+csharp_style_unused_value_expression_statement_preference = discard_variable
+
+# 'using' directive preferences
+csharp_using_directive_placement = outside_namespace:error
+
+# New line preferences
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false:suggestion
+csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true
+csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false:warning
+csharp_style_allow_embedded_statements_on_same_line_experimental = true
+
+#### C# Formatting Rules ####
+
+# New line preferences
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_open_brace = all
+csharp_new_line_between_query_expression_clauses = true
+
+# Indentation preferences
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = true
+csharp_indent_labels = one_less_than_current
+csharp_indent_switch_labels = true
+
+# Space preferences
+csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_between_square_brackets = false
+
+# Wrapping preferences
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
+
+#### Naming styles ####
+
+# Naming rules
+
+dotnet_naming_rule.interface_should_be_begins_with_i.severity = error
+dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
+dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
+
+dotnet_naming_rule.types_should_be_pascal_case.severity = error
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = error
+dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
+dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.public_internal_fields_should_be_pascal_case.severity = error
+dotnet_naming_rule.public_internal_fields_should_be_pascal_case.symbols = public_internal_fields
+dotnet_naming_rule.public_internal_fields_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = error
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = error
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case
+
+dotnet_naming_rule.parameters_should_be_camel_case.severity = error
+dotnet_naming_rule.parameters_should_be_camel_case.symbols = method_parameters
+dotnet_naming_rule.parameters_should_be_camel_case.style = camel_case
+
+# Symbol specifications
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal
+dotnet_naming_symbols.interface.required_modifiers = 
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal
+dotnet_naming_symbols.types.required_modifiers = 
+
+dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
+dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.non_field_members.required_modifiers = 
+
+dotnet_naming_symbols.public_internal_fields.applicable_kinds = field
+dotnet_naming_symbols.public_internal_fields.applicable_accessibilities = public, internal
+dotnet_naming_symbols.public_internal_fields.required_modifiers = 
+
+dotnet_naming_symbols.constant_fields.applicable_kinds   = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers = 
+
+dotnet_naming_symbols.method_parameters.applicable_kinds = parameter
+dotnet_naming_symbols.method_parameters.required_modifiers = 
+
+# Naming styles
+
+dotnet_naming_style.camel_case.required_prefix = 
+dotnet_naming_style.camel_case.required_suffix = 
+dotnet_naming_style.camel_case.word_separator = 
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+dotnet_naming_style.pascal_case.required_prefix = 
+dotnet_naming_style.pascal_case.required_suffix = 
+dotnet_naming_style.pascal_case.word_separator = 
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.required_suffix = 
+dotnet_naming_style.begins_with_i.word_separator = 
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+
+# Microsoft code analyzers
+
+# CA1591: Mising XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
+
+# CA1708: Identifiers should differ by more than case
+dotnet_diagnostic.CA1708.severity = warning
+
+# CA1710: Identifiers should have correct suffix
+dotnet_diagnostic.CA1710.severity = warning
+
+# CA1711: Identifiers should not have incorrect suffix
+dotnet_diagnostic.CA1711.severity = warning
+
+# CA1712: Do not prefix enum values with type name
+dotnet_diagnostic.CA1712.severity = warning
+
+# CA1714: Flags enums should have plural names
+dotnet_diagnostic.CA1714.severity = warning
+
+# CA1715: Identifiers should have correct prefix
+dotnet_diagnostic.CA1715.severity = warning
+
+# CA1716: Identifiers should not match keywords
+dotnet_diagnostic.CA1716.severity = none
+
+# CA1717: Only FlagsAttribute enums should have plural names
+dotnet_diagnostic.CA1717.severity = warning
+
+# CA1720: Identifier contains type name
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1721: Property names should not match get methods
+dotnet_diagnostic.CA1721.severity = error
+
+# CA1724: Type names should not match namespaces
+dotnet_diagnostic.CA1724.severity = error
+
+# CA1725: Parameter names should match base declaration
+dotnet_diagnostic.CA1725.severity = warning
+
+# CA1200: Avoid using cref tags with a prefix
+dotnet_diagnostic.CA1200.severity = warning
+
+# CA1031: Modify try-catch to catch more specific exception type or rethrow
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1030: Use events where appropriate
+dotnet_diagnostic.CA1030.severity = none
+
+# CA1032: Implement standard exception constructor
+dotnet_diagnostic.CA1032.severity = none
+
+# CA1051: Do not declare visible instance fields
+dotnet_diagnostic.CA1051.severity = none
+
+# CA1054: Uri parameters should not be strings
+dotnet_diagnostic.CA1054.severity = none
+
+# CA1055: Uri return values should not be strings
+dotnet_diagnostic.CA1055.severity = none
+
+# CA1056: Change type of property from url string to Uri
+dotnet_diagnostic.CA1056.severity = none
+
+# CA1200: Avoi using cref tags with prefix
+dotnet_diagnostic.CA1200.severity = none
+
+# CA1303: Method passes literal string instead of localized resource
+dotnet_diagnostic.CA1303.severity = none
+
+# CA1304: Behavior of string.ToLower() could vary based on current user's locale settings
+dotnet_diagnostic.CA1304.severity = none
+
+# CA1305: Behavior of DateTime.ToString() could vary based on current user's locale settings
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1308: Replace call to 'ToLowerInvariant' to 'ToUpperInvariant'
+dotnet_diagnostic.CA1308.severity = none
+
+# CA1307: Behavior of string.EndsWith could vary based on current user's locale settings
+dotnet_diagnostic.CA1307.severity = none
+
+# CA1309: Use ordinal string comparison
+dotnet_diagnostic.CA1309.severity = none
+
+# CA1310: Specify StringComparison for correctness
+dotnet_diagnostic.CA1310.severity = none
+
+# CA1710: Name of class should end with 'Collection'
+dotnet_diagnostic.CA1710.severity = none
+
+# CA1727: Use PascalCase for named placeholders
+dotnet_diagnostic.CA1727.severity = warning
+
+# CA1819: Properties should not return arrays
+dotnet_diagnostic.CA1819.severity = none
+
+# CA1822: Member does not access instance data and can be marked as static
+dotnet_diagnostic.CA1822.severity = none
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
+# CA2007: Consider calling ConfigureAwait on awaited task
+dotnet_diagnostic.CA2007.severity = none
+
+# CA2201: Do not raise reserved exception types
+dotnet_diagnostic.CA2201.severity = none
+
+# CA2227: Change property to be readonly, remove setter
+dotnet_diagnostic.CA2227.severity = none
+
+# CA5351: Uses broken cryptographic algorithm MD5
+dotnet_diagnostic.CA5351.severity = none
+
+# CS8032: Cannot create analyzer
+dotnet_diagnostic.CS8032.severity = none
+
+# CA1708: Identifiers should differ by more than case
+dotnet_diagnostic.CA1708.severity = none
+
+# CA2211: Non-constant fields should not be visible
+dotnet_diagnostic.CA2211.severity = none
+
+# CA1805: Do not initialize unnecessarily
+dotnet_diagnostic.CA1805.severity = none
+
+# CA1000: Do not declare static members on generic types
+dotnet_diagnostic.CA1000.severity = none
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
+# CA1310: Specify StringComparison for correctness
+dotnet_diagnostic.CA1310.severity = none
+
+# CA1309: Use ordinal string comparison
+dotnet_diagnostic.CA1309.severity = none
+
+# CA1051: Do not declare visible instance fields
+dotnet_diagnostic.CA1051.severity = none
+
+# IDE0079: Remove unnecessary suppression
+dotnet_diagnostic.IDE0079.severity = silent
+
+# Microsoft problematic analyzers
+
+# MVC1004: Some MVC bullshit rule
+dotnet_diagnostic.MVC1004.severity = none
+
+# IDE rules
+
+# IDE0011: Add braces to if statement
+dotnet_diagnostic.IDE0011.severity = none
+
+# IDE0037: Member name can be simplified
+dotnet_diagnostic.IDE0011.severity = none
+
+# IDE0059: Unnecessary assignment of a value
+dotnet_diagnostic.IDE0059.severity = none
+
+# IDE0063: Simplify using initialization to single line
+dotnet_diagnostic.IDE0063.severity = none
+
+# IDE0060: Remove unused parameter if its not part of shipped public API
+dotnet_diagnostic.IDE0060.severity = none
+
+# IDE0066: Convert switch statement to switch expression
+dotnet_diagnostic.IDE0066.severity = none
+
+# IDE0090: 'new' expression can be simplififed
+dotnet_diagnostic.IDE0090.severity = none
+
+# IoLabs analyzer rules
+
+# PA0001: XML documentation is disabled for the project
+dotnet_diagnostic.PA0001.severity = error
+
+# PA0002: Element is not documented	
+dotnet_diagnostic.PA0002.severity = error
+
+# PA0003: Enum member is not documented	
+dotnet_diagnostic.PA0003.severity = error
+
+# PA0004: XML summary is empty
+dotnet_diagnostic.PA0004.severity = error
+
+# PA0005: XML summary has to end with a dot	
+dotnet_diagnostic.PA0005.severity = error
+
+# PA0006: XML summary has to start with upper case letter
+dotnet_diagnostic.PA0006.severity = error
+
+# PA0007: XML summary cannot contain leading white space
+dotnet_diagnostic.PA0007.severity = error
+
+# PA0008: XML summary cannot contain trailing white space
+dotnet_diagnostic.PA0008.severity = error
+
+# PA0009: XML summary is short and can be inlined
+dotnet_diagnostic.PA0009.severity = error
+
+# PA0010: XML parameter is not documented
+dotnet_diagnostic.PA0010.severity = error
+
+# PA0011: XML parameter documentation is empty	
+dotnet_diagnostic.PA0011.severity = error
+
+# PA0012: XML parameter documentation cannot end with a dot
+dotnet_diagnostic.PA0012.severity = error
+
+# PA0013: XML parameter documentation has to start with upper case letter
+dotnet_diagnostic.PA0013.severity = error
+
+# PA0014: XML parameter documentation cannot contain leading white space
+dotnet_diagnostic.PA0014.severity = error
+
+# PA0015: XML parameter documentation cannot contain trailing white space
+dotnet_diagnostic.PA0015.severity = error
+
+# PA0016: XML parameter documentation is short and can be inlined
+dotnet_diagnostic.PA0016.severity = error
+
+# PA0017: XML parameter documentation name does not match declaration
+dotnet_diagnostic.PA0017.severity = error
+
+# PA0018: XML parameter documentation order does not match declaration
+dotnet_diagnostic.PA0019.severity = error
+
+# PA0019: XML parameters documentation is not allowed on this element / does not have any parameters
+dotnet_diagnostic.PA0019.severity = error
+
+# PA0021: Element return value is not documented
+dotnet_diagnostic.PA0021.severity = none
+
+# PA0022: XML returns is empty
+dotnet_diagnostic.PA0022.severity = error
+
+# PA0023: XML returns has to end with a dot
+dotnet_diagnostic.PA0023.severity = error
+
+# PA0024: XML returns has to start with upper case letter
+dotnet_diagnostic.PA0024.severity = error
+
+# PA0025: XML returns cannot contain leading white space
+dotnet_diagnostic.PA0025.severity = error
+
+# PA0026: XML returns cannot contain trailing white space
+dotnet_diagnostic.PA0026.severity = error
+
+# PA0027: XML returns is short and can be inlined	
+dotnet_diagnostic.PA0027.severity = error
+
+# PA0028: Element does not have return value
+dotnet_diagnostic.PA0028.severity = error
+
+# PA0029: XML remarks is optional but if exists then cannot be empty
+dotnet_diagnostic.PA0029.severity = error
+
+# PA0030: XML remarks has to end with a dot
+dotnet_diagnostic.PA0030.severity = error
+
+# PA0031: XML remarks has to start with upper case letter
+dotnet_diagnostic.PA0031.severity = error
+
+# PA0032: XML remarks cannot contain leading white space
+dotnet_diagnostic.PA0032.severity = error
+
+# PA0033: XML remarks cannot contain trailing white space
+dotnet_diagnostic.PA0033.severity = error
+
+# PA0034: XML remarks is short and can be inlined	
+dotnet_diagnostic.PA0034.severity = error
+
+# PA0035: XML exception is optional but if exists then cannot be empty
+dotnet_diagnostic.PA0035.severity = error
+
+# PA0036: XML exception cannot end with a dot
+dotnet_diagnostic.PA0036.severity = error
+
+# PA0037: XML exception has to start with upper case letter
+dotnet_diagnostic.PA0037.severity = error
+
+# PA0038: XML exception cannot contain leading white space
+dotnet_diagnostic.PA0038.severity = error
+
+# PA0039: XML exception cannot contain trailing white space
+dotnet_diagnostic.PA0039.severity = error
+
+# PA0040: XML exception is short and can be inlined
+dotnet_diagnostic.PA0040.severity = error
+
+# PA0101: Identifiers cannot contain underscores.	
+dotnet_diagnostic.PA0101.severity = error
+
+# PA0102: Type name must match its source file name.	
+dotnet_diagnostic.PA0102.severity = error
+
+# PA0103: File can contain only one relevant type.	
+dotnet_diagnostic.PA0103.severity = error
+
+# PA0104: Namespace does not match to folder structure.	
+dotnet_diagnostic.PA0104.severity = error
+
+# PA0105: RFERL namespace have to start with 'RFERL.'.	
+dotnet_diagnostic.PA0105.severity = error
+
+# PA0106 - Enum member names must be in uppercase.
+dotnet_diagnostic.PA0106.severity = error
+
+# PA0201: Single line comment must start with a space.	
+dotnet_diagnostic.PA0201.severity = error
+
+# PA0202: Code cannot contain multiple blank rows in a row.	
+dotnet_diagnostic.PA0202.severity = error
+
+# PA0203: Code elements must be separated by blank line.	
+dotnet_diagnostic.PA0203.severity = error
+
+# PA0204: Blank line cannot follow opening brace.	
+dotnet_diagnostic.PA0204.severity = error
+
+# PA0205: Blank line cannot preceed closing brace.	
+dotnet_diagnostic.PA0205.severity = error
+
+# PA0206: Source file cannot start with blank line.	
+dotnet_diagnostic.PA0206.severity = error
+
+# PA0301: Regions inside element body is not allowed.	
+dotnet_diagnostic.PA0301.severity = error
+
+# PA0302: Do not combine field declarations.	
+dotnet_diagnostic.PA0302.severity = error
